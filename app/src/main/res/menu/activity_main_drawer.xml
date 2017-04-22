@@ -4,31 +4,39 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="Home" />
     <item
         android:id="@+id/nav_general"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_list_black_24dp"
         android:title="General" />
     <item
         android:id="@+id/nav_schedules"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_schedule_black_24dp"
         android:title="Schedules" />
     <item
         android:id="@+id/nav_ps"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/ic_local_grocery_store_black_24dp"
         android:title="Play Store" />
     <item
         android:id="@+id/nav_storage"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_sd_storage_black_24dp"
         android:title="Storage" />
-    <item android:title="Import and Export"
-        android:id="@+id/nav_iae"/>
-    <item android:title="My Device"
-        android:id="@+id/device"/>
-    <item android:title="Special Features"
-        android:id="@+id/features"/>
-    <item android:title="Help and Licensing"
-        android:id="@+id/halp"/>
+    <item
+        android:id="@+id/nav_iae"
+        android:icon="@drawable/ic_import_export_black_24dp"
+        android:title="Import and Export" />
+    <item
+        android:id="@+id/device"
+        android:icon="@drawable/ic_settings_cell_black_24dp"
+        android:title="My Device" />
+    <item
+        android:id="@+id/features"
+        android:icon="@drawable/ic_folder_special_black_24dp"
+        android:title="Special Features" />
+    <item
+        android:id="@+id/halp"
+        android:icon="@drawable/ic_help_black_24dp"
+        android:title="Help and Licensing" />
 
 </menu>

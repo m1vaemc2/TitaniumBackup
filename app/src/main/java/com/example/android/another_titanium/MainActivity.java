@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -23,11 +24,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         // Add Backed up Apps
         ListView v = (ListView) findViewById(R.id.lstApps);
         ArrayList<Backup_Item> apps = new ArrayList<>();
-        apps.add(new Backup_Item("", "Google Chrome", "16MB", ""));
+        apps.add(new Backup_Item("@drawable/chrome.png", "Google Chrome", "16MB", ""));
         apps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
         apps.add(new Backup_Item("", "Uber", "6MB", ""));
         apps.add(new Backup_Item("", "Youtube", "1MB", ""));
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
         ArrayList<Backup_Item> archivedApps = new ArrayList<>();
-        archivedApps.add(new Backup_Item("", "Google Chrome", "16MB", "01/01/2017"));
+        archivedApps.add(new Backup_Item("c2.png", "Google Chrome", "16MB", "01/01/2017"));
         archivedApps.add(new Backup_Item("", "Uberrrr", "66MB", "08/09/2016"));
         archivedApps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", "28/03/2017"));
 
@@ -96,6 +99,13 @@ public class MainActivity extends AppCompatActivity
         registerForContextMenu(findViewById(R.id.btnCallLog));
         registerForContextMenu(findViewById(R.id.btnGallery));
         System.out.println("Memory");
+
+        TabHost tabhost = (TabHost) findViewById(R.id.tabHost);
+        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
+        {
+            TextView tv = (TextView) tabhost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(-1);
+        }
 
     }
 
@@ -152,5 +162,31 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void showDialog(View view)
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
+        builder1.setTitle("Do you want to encrypt this data?");
+        builder1.setMessage("Encrypted backups will be more secure and can only be accessed by you.");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

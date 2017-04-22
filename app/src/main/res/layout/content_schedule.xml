@@ -42,7 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="19dp" />
+            android:layout_marginEnd="19dp"
+            android:backgroundTint="@color/colorBackup"
+            android:theme="@style/AppTheme.Switch" />
 
     </RelativeLayout>
 
@@ -86,7 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="19dp" />
+            android:layout_marginEnd="19dp"
+            android:theme="@style/AppTheme.Switch" />
 
     </RelativeLayout>
 
@@ -128,7 +131,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="19dp" />
+            android:layout_marginEnd="19dp"
+            android:theme="@style/AppTheme.Switch" />
 
     </RelativeLayout>
 
@@ -138,4 +142,5 @@
         android:background="@android:color/darker_gray">
 
     </FrameLayout>
+
 </LinearLayout>
