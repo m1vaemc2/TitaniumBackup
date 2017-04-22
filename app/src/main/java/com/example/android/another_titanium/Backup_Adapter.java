@@ -76,9 +76,12 @@ public class Backup_Adapter extends BaseAdapter
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         convertView = LayoutInflater.from(context).inflate(R.layout.backup_item, parent, false);
         Backup_Item b = getItem(position);
+
+        int drawableId = context.getResources().getIdentifier(b.image, "drawable", context.getPackageName());
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon1);
         TextView name = (TextView) convertView.findViewById(R.id.txtAppName);
@@ -90,7 +93,7 @@ public class Backup_Adapter extends BaseAdapter
         size.setText(b.appSize);
         date.setText(b.backupDate);
         selected.setChecked(b.selected);
-        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_menu_camera));
+        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
 
         return convertView;
     }

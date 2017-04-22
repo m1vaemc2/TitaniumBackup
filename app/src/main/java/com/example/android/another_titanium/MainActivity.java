@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         userApps.add(new Backup_Item("", "Uber", "6MB", ""));
         userApps.add(new Backup_Item("", "Youtube", "1MB", ""));
 
+
         systemApps.add(new Backup_Item("", "Gallery", "16MB", ""));
         systemApps.add(new Backup_Item("", "Messages", "500MB", ""));
         systemApps.add(new Backup_Item("", "Emails", "6MB", ""));
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
         ArrayList<Backup_Item> archivedApps = new ArrayList<>();
-        archivedApps.add(new Backup_Item("", "Google Chrome", "16MB", "01/01/2017"));
+        archivedApps.add(new Backup_Item("c2.png", "Google Chrome", "16MB", "01/01/2017"));
         archivedApps.add(new Backup_Item("", "Uberrrr", "66MB", "08/09/2016"));
         archivedApps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", "28/03/2017"));
 
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity
         registerForContextMenu(findViewById(R.id.btnCallLog));
         registerForContextMenu(findViewById(R.id.btnGallery));
         System.out.println("Memory");
+
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
@@ -123,6 +127,14 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+
+        for(int i=0;i<host.getTabWidget().getChildCount();i++)
+        {
+            TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(-1);
+        }
+
+
     }
 
     @Override
@@ -206,5 +218,31 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void showDialog(View view)
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
+        builder1.setTitle("Do you want to encrypt this data?");
+        builder1.setMessage("Encrypted backups will be more secure and can only be accessed by you.");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

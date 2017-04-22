@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:orderInCategory="0"
+        android:title="User"
+        android:id="@+id/btn_userApps"
+        />
+    <item
+        android:orderInCategory="1"
+        android:title="System"
+        android:id="@+id/btn_systemApps"
+        />
+</menu>
