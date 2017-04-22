@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
+                android:theme="@style/AppTheme"
                 android:visibility="visible"></TabWidget>
 
             <FrameLayout
@@ -35,30 +36,52 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/Archive"
+                    android:id="@+id/Installed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
                     <ListView
-                        android:id="@+id/lstArchive"
+                        android:id="@+id/lstApps"
                         android:layout_width="match_parent"
-                        android:layout_height="346dp"
-                        android:layout_weight="0.9" />
+                        android:layout_height="396dp" />
 
-                    <Button
-                        android:id="@+id/btnRestore"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="0.1"
-                        android:background="@color/colorRestore"
-                        android:enabled="false"
-                        android:text="Backup"
-                        android:textColor="@android:color/white" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnBackup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#00838F"
+                            android:enabled="true"
+                            android:text="Backup"
+                            android:textColor="@android:color/white" />
+
+                        <Button
+                            android:id="@+id/btnToCloud"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#00838F"
+                            android:enabled="true"
+                            android:onClick="showDialog"
+                            android:text="Send to Cloud"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <RelativeLayout
@@ -81,9 +104,9 @@
                         custom:arc_bottom_text_size="12dp"
                         custom:arc_finished_color="@android:color/holo_purple"
                         custom:arc_progress="75"
-                        custom:arc_unfinished_color="#aaaaaa"
+                        custom:arc_suffix_text=" "
                         custom:arc_text_size="25dp"
-                        custom:arc_suffix_text=" "/>
+                        custom:arc_unfinished_color="#aaaaaa" />
 
                     <com.github.lzyzsd.circleprogress.ArcProgress
                         android:id="@+id/arcProgress"
@@ -97,9 +120,9 @@
                         custom:arc_finished_color="@android:color/holo_red_dark"
                         custom:arc_progress="75"
                         custom:arc_stroke_width="5dp"
-                        custom:arc_unfinished_color="#aaaaaa"
+                        custom:arc_suffix_text=" "
                         custom:arc_text_size="25dp"
-                        custom:arc_suffix_text=" "/>
+                        custom:arc_unfinished_color="#aaaaaa" />
 
                     <com.github.lzyzsd.circleprogress.ArcProgress
                         android:id="@+id/arc_progress"
@@ -113,9 +136,9 @@
                         custom:arc_bottom_text_size="24dp"
                         custom:arc_finished_color="@color/colorBackup"
                         custom:arc_progress="55"
-                        custom:arc_unfinished_color="#aaaaaa"
+                        custom:arc_suffix_text=" "
                         custom:arc_text_size="75dp"
-                        custom:arc_suffix_text=" " />
+                        custom:arc_unfinished_color="#aaaaaa" />
 
 
                     <LinearLayout
@@ -181,32 +204,30 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:id="@+id/Installed"
+                    android:id="@+id/Archive"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:orientation="vertical">
 
                     <ListView
-                        android:id="@+id/lstApps"
+                        android:id="@+id/lstArchive"
                         android:layout_width="match_parent"
                         android:layout_height="346dp"
                         android:layout_weight="0.9" />
 
                     <Button
-                        android:id="@+id/btnBackup"
+                        android:id="@+id/btnRestore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_weight="0.1"
-                        android:background="#00838F"
+                        android:background="@color/colorRestore"
                         android:enabled="false"
-                        android:text="Backup"
+                        android:text="Restore"
                         android:textColor="@android:color/white" />
-
                 </LinearLayout>
 
             </FrameLayout>
