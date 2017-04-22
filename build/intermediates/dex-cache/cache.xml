@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\6d83d4de2249c9e22036e041b7db5dd60dfaf02e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f200454bd6851899efe021d2a4673959986edaed">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d3d02ea518e362de1cf3b27f86b38bcc7e1d82cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_0fb1381c8458099177883a4b446fccae5d98d4db\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\79bb82d76457b9eed027a440ad9d86829a769c6b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1153b70f5f23b085b3e481a9d508ed281727e981\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\88ad3a6835fed073f9b32087bd4934c1e9c00a53\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_edbf007239eec1b444b6130ddcc679c6860f95d2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\65c1b80e838b6c09b90b22048cbb1664cd7bd6b7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_02f91208ef70be59538b104a071a3bb19e3b7c62\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a481b1448d7f5cbfb98a6d43047cb293346f7932">
+        <dex dex="C:\Users\user\Desktop\Another_Titanium\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ab817145aa4d9f6cd90829991ba5d6cf91cb4c07\classes.dex" />
+    </item>
+
+</items>

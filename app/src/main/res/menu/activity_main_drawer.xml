@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_general"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="General" />
+    <item
+        android:id="@+id/nav_schedules"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Schedules" />
+    <item
+        android:id="@+id/nav_ps"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="Play Store" />
+    <item
+        android:id="@+id/nav_storage"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Storage" />
+    <item android:title="Import and Export"
+        android:id="@+id/nav_iae"/>
+    <item android:title="My Device"
+        android:id="@+id/device"/>
+    <item android:title="Special Features"
+        android:id="@+id/features"/>
+    <item android:title="Help and Licensing"
+        android:id="@+id/halp"/>
+
+</menu>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Another_Titanium</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_schedule">Schedule</string>
+
+
+    <string-array name="type">
+        <item>Backup All Apps</item>
+        <item>Backup User Apps</item>
+        <item>Backup System Apps</item>
+        <item>Send</item>
+    </string-array>
+
+    <string-array name="PowerStates">
+        <item>AC Charger Only</item>
+        <item>AC Charger/Battery</item>
+    </string-array>
+</resources>
