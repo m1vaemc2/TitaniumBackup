@@ -4,9 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -19,14 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.flipboard.bottomsheet.BottomSheetLayout;
 
 import java.util.ArrayList;
 
@@ -106,24 +102,17 @@ public class MainActivity extends AppCompatActivity
 
         ((Button) findViewById(R.id.btnBackup)).setEnabled(false);
 
-        registerForContextMenu(findViewById(R.id.btnContacts));
-        registerForContextMenu(findViewById(R.id.btnMusic));
-        registerForContextMenu(findViewById(R.id.btnCallLog));
-        registerForContextMenu(findViewById(R.id.btnGallery));
-        System.out.println("Memory");
-
-
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
             @Override
             public void onTabChanged(String tabId) {
                 int i = host.getCurrentTab();
                 if (i == 0) {
-                    mMenu.findItem(R.id.btn_filter).setVisible(false);
-                    mMenu.findItem(R.id.action_settings).setVisible(false);
+                    mMenu.findItem(R.id.btn_appbar_filter).setVisible(false);
+                    mMenu.findItem(R.id.btn_appbar_search).setVisible(false);
                 } else {
-                    mMenu.findItem(R.id.btn_filter).setVisible(true);
-                    mMenu.findItem(R.id.action_settings).setVisible(true);
+                    mMenu.findItem(R.id.btn_appbar_filter).setVisible(true);
+                    mMenu.findItem(R.id.btn_appbar_search).setVisible(true);
                 }
             }
         });
@@ -133,8 +122,6 @@ public class MainActivity extends AppCompatActivity
             TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             tv.setTextColor(-1);
         }
-
-
     }
 
     @Override
@@ -148,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showPopup(){
-        View menuItemView = findViewById(R.id.btn_filter);
+        View menuItemView = findViewById(R.id.btn_appbar_filter);
         PopupMenu popup = new PopupMenu(this, menuItemView);
         MenuInflater inflate = popup.getMenuInflater();
         inflate.inflate(R.menu.filter_menu, popup.getMenu());
@@ -169,16 +156,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.popup_thingy, menu);
-
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -190,9 +167,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.btn_appbar_search) {
             return true;
-        } else if (id == R.id.btn_filter) {
+        } else if (id == R.id.btn_appbar_filter) {
             showPopup();
             return super.onOptionsItemSelected(item);
         }
@@ -244,5 +221,15 @@ public class MainActivity extends AppCompatActivity
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    public void showActionSheet(View view) {
+        final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
+        actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
+    }
+
+    public void hideActionSheet(View view) {
+        final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
+        actionSheet.dismissSheet();
     }
 }
