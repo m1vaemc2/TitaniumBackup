@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity
 
         // Add Backed up Apps
         ListView v = (ListView) findViewById(R.id.lstApps);
-        userApps.add(new Backup_Item("", "Google Chrome", "16MB", ""));
-        userApps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
-        userApps.add(new Backup_Item("", "Uber", "6MB", ""));
-        userApps.add(new Backup_Item("", "Youtube", "1MB", ""));
+        userApps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
+        userApps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
+        userApps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
+        userApps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
 
 
         systemApps.add(new Backup_Item("", "Gallery", "16MB", ""));

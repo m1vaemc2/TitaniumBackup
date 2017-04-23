@@ -2,6 +2,9 @@ package com.example.android.another_titanium;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -81,8 +85,6 @@ public class Backup_Adapter extends BaseAdapter
         convertView = LayoutInflater.from(context).inflate(R.layout.backup_item, parent, false);
         Backup_Item b = getItem(position);
 
-        int drawableId = context.getResources().getIdentifier(b.image, "drawable", context.getPackageName());
-
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon1);
         TextView name = (TextView) convertView.findViewById(R.id.txtAppName);
         TextView size = (TextView) convertView.findViewById(R.id.txtAppSize);
@@ -93,7 +95,12 @@ public class Backup_Adapter extends BaseAdapter
         size.setText(b.appSize);
         date.setText(b.backupDate);
         selected.setChecked(b.selected);
-        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
+        try {
+            Bitmap bmp = BitmapFactory.decodeStream(context.getAssets().open(b.image));
+            icon.setImageBitmap(bmp);
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        }
 
         return convertView;
     }
