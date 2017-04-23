@@ -2,9 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/btn_filter"
+        android:icon="@android:drawable/ic_media_previous"
+        android:orderInCategory="0"
+        android:title="Filter"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="@string/action_settings"
+        android:visible="false"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

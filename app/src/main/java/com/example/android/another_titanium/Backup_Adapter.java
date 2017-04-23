@@ -5,6 +5,8 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  * Created by user on 2017/04/22.
  */
 
-public class Backup_Adapter implements ListAdapter
+public class Backup_Adapter extends BaseAdapter
 {
     private Context context;
     public ArrayList<Backup_Item> apps;
@@ -45,6 +47,12 @@ public class Backup_Adapter implements ListAdapter
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
+    }
+
+    public void setNewData(ArrayList<Backup_Item> new_items) {
+        apps.clear();
+        apps.addAll(new_items);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -102,6 +110,6 @@ public class Backup_Adapter implements ListAdapter
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return (getCount()==0);
     }
 }
