@@ -50,35 +50,34 @@
                         <ListView
                             android:id="@+id/lstApps"
                             android:layout_width="match_parent"
-                            android:layout_height="396dp" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.9"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
                             android:orientation="horizontal">
 
                             <Button
                                 android:id="@+id/btnBackup"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1"
                                 android:background="#00838F"
                                 android:enabled="true"
                                 android:text="Backup"
+                                android:onClick="backupInstalledApps"
                                 android:textColor="@android:color/white" />
 
                             <Button
                                 android:id="@+id/btnToCloud"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="8dp"
+                                android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
                                 android:background="#00838F"
                                 android:enabled="true"
                                 android:onClick="showDialog"
@@ -221,18 +220,16 @@
                         <ListView
                             android:id="@+id/lstArchive"
                             android:layout_width="match_parent"
-                            android:layout_height="346dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="0.9" />
 
                         <Button
                             android:id="@+id/btnRestore"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
+                            android:layout_margin="8dp"
                             android:layout_weight="0.1"
-                            android:background="@color/colorRestore"
+                            android:background="@color/colorBackup"
                             android:enabled="false"
                             android:text="Restore"
                             android:textColor="@android:color/white" />
