@@ -4,10 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.view.ContextThemeWrapper;
-import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -19,25 +16,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.PopupMenu;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.flipboard.bottomsheet.BottomSheetLayout;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
-{
+        implements NavigationView.OnNavigationItemSelectedListener {
+    private TabHost tabHost;
+    private Menu mMenu;
+    Backup_Adapter adapter;
+    ArrayList<Backup_Item> userApps = new ArrayList<>();
+    ArrayList<Backup_Item> systemApps = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         System.out.println(toolbar.getTitle());
 
-        TabHost host = (TabHost)findViewById(R.id.tabHost);
+        final TabHost host = (TabHost)findViewById(R.id.tabHost);
+        tabHost = host;
         host.setup();
 
         //Tab 1
@@ -73,13 +76,18 @@ public class MainActivity extends AppCompatActivity
 
         // Add Backed up Apps
         ListView v = (ListView) findViewById(R.id.lstApps);
-        ArrayList<Backup_Item> apps = new ArrayList<>();
-        apps.add(new Backup_Item("@drawable/chrome.png", "Google Chrome", "16MB", ""));
-        apps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
-        apps.add(new Backup_Item("", "Uber", "6MB", ""));
-        apps.add(new Backup_Item("", "Youtube", "1MB", ""));
+        userApps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
+        userApps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
+        userApps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
+        userApps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
 
-        Backup_Adapter adapter = new Backup_Adapter(getBaseContext(), apps);
+
+        systemApps.add(new Backup_Item("", "Gallery", "16MB", ""));
+        systemApps.add(new Backup_Item("", "Messages", "500MB", ""));
+        systemApps.add(new Backup_Item("", "Emails", "6MB", ""));
+        systemApps.add(new Backup_Item("", "WiFi Information", "1MB", ""));
+
+        adapter = new Backup_Adapter(getBaseContext(), userApps);
         v.setAdapter(adapter);
 
         // Archive
@@ -94,19 +102,26 @@ public class MainActivity extends AppCompatActivity
 
         ((Button) findViewById(R.id.btnBackup)).setEnabled(false);
 
-        registerForContextMenu(findViewById(R.id.btnContacts));
-        registerForContextMenu(findViewById(R.id.btnMusic));
-        registerForContextMenu(findViewById(R.id.btnCallLog));
-        registerForContextMenu(findViewById(R.id.btnGallery));
-        System.out.println("Memory");
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
-        TabHost tabhost = (TabHost) findViewById(R.id.tabHost);
-        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
+            @Override
+            public void onTabChanged(String tabId) {
+                int i = host.getCurrentTab();
+                if (i == 0) {
+                    mMenu.findItem(R.id.btn_appbar_filter).setVisible(false);
+                    mMenu.findItem(R.id.btn_appbar_search).setVisible(false);
+                } else {
+                    mMenu.findItem(R.id.btn_appbar_filter).setVisible(true);
+                    mMenu.findItem(R.id.btn_appbar_search).setVisible(true);
+                }
+            }
+        });
+
+        for(int i=0;i<host.getTabWidget().getChildCount();i++)
         {
-            TextView tv = (TextView) tabhost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             tv.setTextColor(-1);
         }
-
     }
 
     @Override
@@ -119,34 +134,52 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.popup_thingy, menu);
+    public void showPopup(){
+        View menuItemView = findViewById(R.id.btn_appbar_filter);
+        PopupMenu popup = new PopupMenu(this, menuItemView);
+        MenuInflater inflate = popup.getMenuInflater();
+        inflate.inflate(R.menu.filter_menu, popup.getMenu());
+        popup.show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.btn_userApps) {
+                    adapter.setNewData(userApps);
+                    return true;
+                } else if (item.getItemId() == R.id.btn_systemApps) {
+                    adapter.setNewData(systemApps);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        mMenu = menu;
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        System.out.print(id +"");
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.btn_appbar_search) {
             return true;
+        } else if (id == R.id.btn_appbar_filter) {
+            showPopup();
+            return super.onOptionsItemSelected(item);
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+//        System.out.println("HELLO");
+        return super.onContextItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -188,5 +221,15 @@ public class MainActivity extends AppCompatActivity
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    public void showActionSheet(View view) {
+        final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
+        actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
+    }
+
+    public void hideActionSheet(View view) {
+        final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
+        actionSheet.dismissSheet();
     }
 }

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:onClick="hideActionSheet"
+        android:clickable="true"
+        android:background="@drawable/ripple"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/actionsheet_save"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Quick Backup"
+            android:layout_weight="0.9"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:onClick="hideActionSheet"
+        android:clickable="true"
+        android:background="@drawable/ripple"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/actionsheet_restore"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Quick Restore"
+            android:layout_weight="0.9"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:onClick="hideActionSheet"
+        android:clickable="true"
+        android:background="@drawable/ripple"
+        >
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/actionsheet_backups"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="View Backups"
+            android:layout_weight="0.9"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:onClick="hideActionSheet"
+        android:clickable="true"
+        android:background="@drawable/ripple"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/actionsheet_cloud"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Send to Cloud"
+            android:layout_weight="0.9"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

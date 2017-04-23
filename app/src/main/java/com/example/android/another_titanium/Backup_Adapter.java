@@ -2,22 +2,28 @@ package com.example.android.another_titanium;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by user on 2017/04/22.
  */
 
-public class Backup_Adapter implements ListAdapter
+public class Backup_Adapter extends BaseAdapter
 {
     private Context context;
     public ArrayList<Backup_Item> apps;
@@ -47,6 +53,12 @@ public class Backup_Adapter implements ListAdapter
 
     }
 
+    public void setNewData(ArrayList<Backup_Item> new_items) {
+        apps.clear();
+        apps.addAll(new_items);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return apps.size();
@@ -73,8 +85,6 @@ public class Backup_Adapter implements ListAdapter
         convertView = LayoutInflater.from(context).inflate(R.layout.backup_item, parent, false);
         Backup_Item b = getItem(position);
 
-        int drawableId = context.getResources().getIdentifier(b.image, "drawable", context.getPackageName());
-
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon1);
         TextView name = (TextView) convertView.findViewById(R.id.txtAppName);
         TextView size = (TextView) convertView.findViewById(R.id.txtAppSize);
@@ -85,7 +95,12 @@ public class Backup_Adapter implements ListAdapter
         size.setText(b.appSize);
         date.setText(b.backupDate);
         selected.setChecked(b.selected);
-        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
+        try {
+            Bitmap bmp = BitmapFactory.decodeStream(context.getAssets().open(b.image));
+            icon.setImageBitmap(bmp);
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        }
 
         return convertView;
     }
@@ -102,6 +117,6 @@ public class Backup_Adapter implements ListAdapter
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return (getCount()==0);
     }
 }
