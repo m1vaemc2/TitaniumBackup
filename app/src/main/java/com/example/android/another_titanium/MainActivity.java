@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showActionSheet(View view) {
-        buttonClicked = ((Button) view).getText().toString();
+        buttonClicked = view.getTag().toString();
         final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
         actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
     }
