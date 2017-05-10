@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.ContextThemeWrapper;
@@ -25,10 +26,12 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
 import android.widget.TextView;
-
+import android.os.Handler;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 
 import java.util.ArrayList;
+
+import static android.R.attr.handle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     Backup_Adapter adapter;
     ArrayList<Backup_Item> userApps = new ArrayList<>();
     ArrayList<Backup_Item> systemApps = new ArrayList<>();
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -125,6 +129,30 @@ public class MainActivity extends AppCompatActivity
             TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             tv.setTextColor(-1);
         }
+
+        // Dialogs for backing up etc
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Do you want to encrypt this data?");
+        builder1.setMessage("Encrypted backups will be more secure and can only be accessed by you.");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
     }
 
     @Override
@@ -201,9 +229,71 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void backupInstalledApps(View view) {
-        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
-                "Apps backed up.", Snackbar.LENGTH_SHORT);
-        mySnackbar.show();
+        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Please wait, we're making progress...");
+        progressDialog.setTitle("Backing Up");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
+        final Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                progressDialog.incrementProgressBy(1);
+            }
+        };
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progressDialog.getProgress() <= progressDialog
+                            .getMax()) {
+                        Thread.sleep(50);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progressDialog.getProgress() == progressDialog
+                                .getMax()) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    public void restoreArchive(View view)
+    {
+        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Please wait, we're making progress...");
+        progressDialog.setTitle("Restoring");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
+        final Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                progressDialog.incrementProgressBy(1);
+            }
+        };
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progressDialog.getProgress() <= progressDialog
+                            .getMax()) {
+                        Thread.sleep(50);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progressDialog.getProgress() == progressDialog
+                                .getMax()) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public void showDialog(View view)
@@ -217,9 +307,37 @@ public class MainActivity extends AppCompatActivity
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
-                                "Data successfully encrypted and sent to cloud.", Snackbar.LENGTH_SHORT);
-                        mySnackbar.show();
+                        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
+                        progressDialog.setMax(100);
+                        progressDialog.setMessage("Encrypted data being uploaded to Google Drive...");
+                        progressDialog.setTitle("Sending to Cloud");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.show();
+                        final Handler handle = new Handler() {
+                            @Override
+                            public void handleMessage(Message msg) {
+                                super.handleMessage(msg);
+                                progressDialog.incrementProgressBy(1);
+                            }
+                        };
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    while (progressDialog.getProgress() <= progressDialog
+                                            .getMax()) {
+                                        Thread.sleep(50);
+                                        handle.sendMessage(handle.obtainMessage());
+                                        if (progressDialog.getProgress() == progressDialog
+                                                .getMax()) {
+                                            progressDialog.dismiss();
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
                         dialog.cancel();
                     }
                 });
@@ -228,9 +346,37 @@ public class MainActivity extends AppCompatActivity
                 "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
-                                "Data successfully sent to cloud.", Snackbar.LENGTH_SHORT);
-                        mySnackbar.show();
+                        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
+                        progressDialog.setMax(100);
+                        progressDialog.setMessage("Data being uploaded to Google Drive...");
+                        progressDialog.setTitle("Sending to Cloud");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.show();
+                        final Handler handle = new Handler() {
+                            @Override
+                            public void handleMessage(Message msg) {
+                                super.handleMessage(msg);
+                                progressDialog.incrementProgressBy(1);
+                            }
+                        };
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    while (progressDialog.getProgress() <= progressDialog
+                                            .getMax()) {
+                                        Thread.sleep(50);
+                                        handle.sendMessage(handle.obtainMessage());
+                                        if (progressDialog.getProgress() == progressDialog
+                                                .getMax()) {
+                                            progressDialog.dismiss();
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
                         dialog.cancel();
                     }
                 });
