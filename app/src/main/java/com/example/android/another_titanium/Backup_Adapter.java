@@ -33,25 +33,6 @@ public class Backup_Adapter extends BaseAdapter
         context = c;
         apps = inApps;
     }
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
 
     public void setNewData(ArrayList<Backup_Item> new_items) {
         apps.clear();
@@ -72,11 +53,6 @@ public class Backup_Adapter extends BaseAdapter
     @Override
     public long getItemId(int position) {
         return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override

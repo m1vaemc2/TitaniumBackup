@@ -1,9 +1,12 @@
 package com.example.android.another_titanium;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -17,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TabHost tabHost;
     private Menu mMenu;
+    String buttonClicked = "Nothing";
     Backup_Adapter adapter;
     ArrayList<Backup_Item> userApps = new ArrayList<>();
     ArrayList<Backup_Item> systemApps = new ArrayList<>();
@@ -50,7 +55,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        System.out.println(toolbar.getTitle());
 
         final TabHost host = (TabHost)findViewById(R.id.tabHost);
         tabHost = host;
@@ -82,25 +86,24 @@ public class MainActivity extends AppCompatActivity
         userApps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
 
 
-        systemApps.add(new Backup_Item("", "Gallery", "16MB", ""));
-        systemApps.add(new Backup_Item("", "Messages", "500MB", ""));
-        systemApps.add(new Backup_Item("", "Emails", "6MB", ""));
-        systemApps.add(new Backup_Item("", "WiFi Information", "1MB", ""));
+        systemApps.add(new Backup_Item("gallery.png", "Gallery", "16MB", ""));
+        systemApps.add(new Backup_Item("messages.png", "Messages", "500MB", ""));
+        systemApps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
+        systemApps.add(new Backup_Item("wifi.png", "WiFi Information", "1MB", ""));
 
-        adapter = new Backup_Adapter(getBaseContext(), userApps);
+        adapter = new Backup_Adapter(getBaseContext(), new ArrayList<>(userApps));
         v.setAdapter(adapter);
 
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
         ArrayList<Backup_Item> archivedApps = new ArrayList<>();
-        archivedApps.add(new Backup_Item("c2.png", "Google Chrome", "16MB", "01/01/2017"));
-        archivedApps.add(new Backup_Item("", "Uberrrr", "66MB", "08/09/2016"));
-        archivedApps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", "28/03/2017"));
+        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
+        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
+        archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
+        archivedApps.add(new Backup_Item("email.png", "Emails", "14MB", "15/01/2017"));
 
-        adapter = new Backup_Adapter(getBaseContext(), archivedApps);
-        v.setAdapter(adapter);
-
-        ((Button) findViewById(R.id.btnBackup)).setEnabled(false);
+        Backup_Adapter adapter2 = new Backup_Adapter(getBaseContext(), archivedApps);
+        v.setAdapter(adapter2);
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
@@ -196,6 +199,13 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void backupInstalledApps(View view) {
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                "Apps backed up.", Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
+    }
+
     public void showDialog(View view)
     {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
@@ -207,6 +217,9 @@ public class MainActivity extends AppCompatActivity
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                                "Data successfully encrypted and sent to cloud.", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
                         dialog.cancel();
                     }
                 });
@@ -215,6 +228,9 @@ public class MainActivity extends AppCompatActivity
                 "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                                "Data successfully sent to cloud.", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
                         dialog.cancel();
                     }
                 });
@@ -224,12 +240,69 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showActionSheet(View view) {
+        buttonClicked = view.getTag().toString();
         final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
         actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
     }
 
-    public void hideActionSheet(View view) {
+    public void hideActionSheet() {
         final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
         actionSheet.dismissSheet();
+    }
+
+    public void restoreClick(View view) {
+        hideActionSheet();
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                buttonClicked + " successfully restored.", Snackbar.LENGTH_SHORT);
+        mySnackbar.setAction("UNDO", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mySnackbar.show();
+    }
+
+    public void backupClick(View view) {
+        hideActionSheet();
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                buttonClicked + " successfully backed up.", Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
+    }
+
+    public void sendToCloud(View view) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
+        builder1.setTitle("Do you want to encrypt your " + buttonClicked + "?");
+        builder1.setMessage("Encrypted backups will be more secure and can only be accessed by you.");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                                buttonClicked + " successfully encrypted and sent to cloud.", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
+                                buttonClicked + " successfully sent to cloud.", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    public void clickListBackups(View view) {
+        hideActionSheet();
     }
 }
