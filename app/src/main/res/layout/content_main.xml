@@ -297,9 +297,9 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0.1"
                             android:background="@color/colorBackup"
-                            android:enabled="false"
                             android:text="Restore"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/white"
+                            android:onClick="onArchiveRestoreClick"/>
                     </LinearLayout>
 
                 </FrameLayout>

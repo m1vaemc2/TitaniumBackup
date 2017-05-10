@@ -1,26 +1,22 @@
 package com.example.android.another_titanium;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
@@ -35,9 +31,12 @@ public class MainActivity extends AppCompatActivity
     private TabHost tabHost;
     private Menu mMenu;
     String buttonClicked = "Nothing";
-    Backup_Adapter adapter;
+    Backup_Adapter appsAdapter;
     ArrayList<Backup_Item> userApps = new ArrayList<>();
     ArrayList<Backup_Item> systemApps = new ArrayList<>();
+    ArrayList<Backup_Item> archivedApps = new ArrayList<>();
+    Backup_Adapter archiveAdapter;
+    boolean showingUserApps = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -90,20 +89,22 @@ public class MainActivity extends AppCompatActivity
         systemApps.add(new Backup_Item("messages.png", "Messages", "500MB", ""));
         systemApps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
         systemApps.add(new Backup_Item("wifi.png", "WiFi Information", "1MB", ""));
+        for (Backup_Item b : systemApps) {
+            b.isSystemApp = true;
+        }
 
-        adapter = new Backup_Adapter(getBaseContext(), new ArrayList<>(userApps));
-        v.setAdapter(adapter);
+        appsAdapter = new Backup_Adapter(getBaseContext(), new ArrayList<>(userApps));
+        v.setAdapter(appsAdapter);
 
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
-        ArrayList<Backup_Item> archivedApps = new ArrayList<>();
-        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
-        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
-        archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
-        archivedApps.add(new Backup_Item("email.png", "Emails", "14MB", "15/01/2017"));
 
-        Backup_Adapter adapter2 = new Backup_Adapter(getBaseContext(), archivedApps);
-        v.setAdapter(adapter2);
+//        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
+//        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
+//        archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
+
+        archiveAdapter = new Backup_Adapter(getBaseContext(),  new ArrayList<>(archivedApps));
+        v.setAdapter(archiveAdapter);
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
@@ -147,10 +148,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.btn_userApps) {
-                    adapter.setNewData(userApps);
+                    showingUserApps = true;
+                    appsAdapter.setNewData(userApps);
                     return true;
                 } else if (item.getItemId() == R.id.btn_systemApps) {
-                    adapter.setNewData(systemApps);
+                    showingUserApps = false;
+                    appsAdapter.setNewData(systemApps);
                     return true;
                 }
                 return false;
@@ -200,10 +203,45 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /* The OnClick handler for the Backup button on the Installed Apps screen */
     public void backupInstalledApps(View view) {
-        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet),
-                "Apps backed up.", Snackbar.LENGTH_SHORT);
-        mySnackbar.show();
+        ArrayList<Backup_Item> toChange;    // The list of apps being backed up
+
+        // Get the relevant arraylist (User or system)
+        if (showingUserApps) {
+            toChange = userApps;
+        } else {
+            toChange = systemApps;
+        }
+
+        // Get the selected apps
+        ArrayList<Backup_Item> toRemove = new ArrayList<>();
+        for (Backup_Item b : toChange) {
+            if (b.selected) {
+                toRemove.add(b);
+                b.selected = false;
+            }
+        }
+
+        // Show snackbar
+        if (toRemove.size() > 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Backed up " + toRemove.size() + " apps.", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        } else if (toRemove.size() == 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Backed up " + toRemove.get(0).appName + ".", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+
+        // Add apps to archive
+        for (Backup_Item b : toRemove) {
+            if (!archivedApps.contains(b)) {
+                archivedApps.add(b);
+            }
+        }
+
+        // Update adapters
+        appsAdapter.setNewData(toChange);
+        archiveAdapter.setNewData(archivedApps);
     }
 
     public void showDialog(View view)
@@ -304,5 +342,50 @@ public class MainActivity extends AppCompatActivity
 
     public void clickListBackups(View view) {
         hideActionSheet();
+    }
+
+    /* OnClick handler for the Restore button on the archive screen */
+    public void onArchiveRestoreClick(View view) {
+        ArrayList<Backup_Item> toRemove = new ArrayList<>();    // The apps that are being restored
+
+        // Get selected apps (and reset checkboxes)
+        for (Backup_Item b : archivedApps) {
+            if (b.selected) {
+                toRemove.add(b);
+                b.selected = false;
+            }
+        }
+
+        // Show snackbar
+        if (toRemove.size() > 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Restored " + toRemove.size() + " apps.", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        } else if (toRemove.size() == 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Restored " + toRemove.get(0).appName + ".", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+
+        // Remove apps from archive
+        archivedApps.removeAll(toRemove);
+
+        // Add apps to relevant screens (user or system)
+        for (Backup_Item b : toRemove) {
+            System.out.println(b.appName + " - " + b.isSystemApp);
+            if (b.isSystemApp) {
+                if (!systemApps.contains(b))
+                    systemApps.add(b);
+            } else {
+                if (!userApps.contains(b))
+                    userApps.add(b);
+            }
+        }
+
+        // Update adapters
+        archiveAdapter.setNewData(archivedApps);
+        if (showingUserApps) {
+            appsAdapter.setNewData(userApps);
+        } else {
+            appsAdapter.setNewData(systemApps);
+        }
     }
 }

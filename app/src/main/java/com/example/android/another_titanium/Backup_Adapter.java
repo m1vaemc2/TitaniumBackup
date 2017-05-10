@@ -1,19 +1,15 @@
 package com.example.android.another_titanium;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -59,7 +55,7 @@ public class Backup_Adapter extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
         convertView = LayoutInflater.from(context).inflate(R.layout.backup_item, parent, false);
-        Backup_Item b = getItem(position);
+        final Backup_Item b = getItem(position);
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon1);
         TextView name = (TextView) convertView.findViewById(R.id.txtAppName);
@@ -71,6 +67,15 @@ public class Backup_Adapter extends BaseAdapter
         size.setText(b.appSize);
         date.setText(b.backupDate);
         selected.setChecked(b.selected);
+        convertView.setTag(b);
+        selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                b.selected = isChecked;
+                System.out.println(b.selected);
+            }
+        });
+
         try {
             Bitmap bmp = BitmapFactory.decodeStream(context.getAssets().open(b.image));
             icon.setImageBitmap(bmp);
