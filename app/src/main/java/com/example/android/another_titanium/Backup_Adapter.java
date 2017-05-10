@@ -23,6 +23,7 @@ public class Backup_Adapter extends BaseAdapter
 {
     private Context context;
     public ArrayList<Backup_Item> apps;
+    public boolean isArchive = false;
 
     public Backup_Adapter(Context c, ArrayList<Backup_Item> inApps)
     {
@@ -65,7 +66,8 @@ public class Backup_Adapter extends BaseAdapter
 
         name.setText(b.appName);
         size.setText(b.appSize);
-        date.setText(b.backupDate);
+        if (isArchive)
+            date.setText(b.backupDate);
         selected.setChecked(b.selected);
         convertView.setTag(b);
         selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

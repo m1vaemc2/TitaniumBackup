@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,9 +102,10 @@ public class MainActivity extends AppCompatActivity
 
 //        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
 //        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
-//        archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
+        archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
 
         archiveAdapter = new Backup_Adapter(getBaseContext(),  new ArrayList<>(archivedApps));
+        archiveAdapter.isArchive = true;
         v.setAdapter(archiveAdapter);
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -214,12 +216,16 @@ public class MainActivity extends AppCompatActivity
             toChange = systemApps;
         }
 
+        Calendar c = Calendar.getInstance();
+        String date = c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR) + " @ " + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE);
+
         // Get the selected apps
         ArrayList<Backup_Item> toRemove = new ArrayList<>();
         for (Backup_Item b : toChange) {
             if (b.selected) {
                 toRemove.add(b);
                 b.selected = false;
+                b.backupDate = date;
             }
         }
 
@@ -236,6 +242,13 @@ public class MainActivity extends AppCompatActivity
         for (Backup_Item b : toRemove) {
             if (!archivedApps.contains(b)) {
                 archivedApps.add(b);
+            } else {
+                // Update date of backup
+                for (Backup_Item b2 : archivedApps) {
+                    if (b.equals(b2)) {
+                        b2.backupDate = date;
+                    }
+                }
             }
         }
 
@@ -353,6 +366,7 @@ public class MainActivity extends AppCompatActivity
             if (b.selected) {
                 toRemove.add(b);
                 b.selected = false;
+                b.backupDate = "";
             }
         }
 
