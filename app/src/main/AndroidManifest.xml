@@ -20,10 +20,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:parentActivityName=".MainActivity"
             android:name=".Schedule"
             android:label="@string/title_activity_schedule"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

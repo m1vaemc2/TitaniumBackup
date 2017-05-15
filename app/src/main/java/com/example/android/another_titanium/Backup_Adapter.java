@@ -95,4 +95,29 @@ public class Backup_Adapter extends BaseAdapter
     public boolean isEmpty() {
         return (getCount()==0);
     }
+
+    public Backup_Adapter searchAdapter(String searched) {
+        if (searched == "" || searched == null) {
+            System.out.println("No query");
+            return null;
+        }
+        //System.out.println(searched);
+
+        ArrayList<Backup_Item> results = new ArrayList<>();
+
+        for (int x = 0; x < getCount(); ++x) {
+            Backup_Item temp = getItem(x);
+
+            if (temp.appName.contains(searched)) {
+                //System.out.println(temp.appName);
+                results.add(temp);
+            }
+        }
+
+        if (results.size() == 0) {
+            return null;
+        }
+
+        return new Backup_Adapter(context, results);
+    }
 }

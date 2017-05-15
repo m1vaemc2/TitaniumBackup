@@ -28,7 +28,12 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.os.Handler;
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.github.lzyzsd.circleprogress.ArcProgress;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static android.R.attr.handle;
@@ -153,6 +158,16 @@ public class MainActivity extends AppCompatActivity
                 });
 
         AlertDialog alert11 = builder1.create();
+
+        long total = getTotalExternalMemorySize() + getTotalInternalMemorySize();
+        long used = getAvailableExternalMemorySize() + getAvailableExternalMemorySize();
+
+        double percentage = ((total - used) / (double)total);
+        int x = (int)(percentage * 100);
+        System.out.println("Memory : " + x);
+
+        ArcProgress arc = (ArcProgress) findViewById(R.id.arc_progress);
+        arc.setProgress(x);
     }
 
     @Override
@@ -198,12 +213,18 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
+        System.out.println("MEMORYX1");
         if (id == R.id.btn_appbar_search) {
+            System.out.println("MEMORYX2");
+            Intent i = new Intent(this, SearchActivity.class);
+            startActivity(i);
             return true;
         } else if (id == R.id.btn_appbar_filter) {
+            System.out.println("MEMORYX3");
             showPopup();
             return super.onOptionsItemSelected(item);
         }
+        System.out.println("MEMORYX4");
         return super.onOptionsItemSelected(item);
     }
 
@@ -450,5 +471,49 @@ public class MainActivity extends AppCompatActivity
 
     public void clickListBackups(View view) {
         hideActionSheet();
+    }
+
+    public static long getAvailableInternalMemorySize() {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return availableBlocks * blockSize;
+    }
+
+    public static long getTotalInternalMemorySize() {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return totalBlocks * blockSize;
+    }
+
+    public static long getAvailableExternalMemorySize() {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSize();
+            long availableBlocks = stat.getAvailableBlocks();
+            return availableBlocks * blockSize;
+        } else {
+            return 0;
+        }
+    }
+
+    public static long getTotalExternalMemorySize() {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSize();
+            long totalBlocks = stat.getBlockCount();
+            return totalBlocks * blockSize;
+        } else {
+            return 0;
+        }
+    }
+
+    public static boolean externalMemoryAvailable() {
+        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
     }
 }
