@@ -1,9 +1,8 @@
 package com.example.android.another_titanium;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -16,8 +15,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        //final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -28,6 +25,11 @@ public class SearchActivity extends AppCompatActivity {
         apps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
         apps.add(new Backup_Item("", "Uber", "6MB", ""));
         apps.add(new Backup_Item("", "Youtube", "1MB", ""));
+
+//        apps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
+//        apps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
+//        apps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
+//        apps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
 
         final Backup_Adapter adapter = new Backup_Adapter(getBaseContext(), apps);
         v.setAdapter(adapter);

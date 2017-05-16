@@ -119,40 +119,13 @@
         <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_31c18696f723fa4188029f7a7f57c8a1d04103f8.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\bc2b15aeab3f7c1768c92962040d0935c919798f\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e9a4d49b97190d4490310827938d428c6fc996f4">
-        <dex dex="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_575065950eecbc62c9c2a8d563674b1dfb9b62a0/classes.dex" />
-    </item>
-    <item
         is-multidex="true"
-        jar="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="a120ba98b868dd75fbb3f7109677b183d260d469">
-        <dex dex="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_52ad0dd4e4d847c03db213a262790acef531cb84/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_2ffdc5cfab3aa3ff01d9a17376cd66a107c31200/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/keegan/.android/build-cache/7d67f0a329296d3a022e0e5a8a7ae01f28964048/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="92137af0a8a8623fa451a25beaffc4a9f22a8bb9">
-        <dex dex="/home/keegan/AndroidStudioProjects/IMY310/TitaniumBackup/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ef6e71e3f1005f853c57265136b26adcac7258eb/classes.dex" />
+        sha1="19795580892f7a0dae2eb8b825ae09096f8ec93f">
+        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d4670d843cda130bc18ed5864771c7694ada9fd5\classes.dex" />
     </item>
 
 </items>

@@ -6,8 +6,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StatFs;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -28,9 +30,6 @@ import android.widget.TextView;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.github.lzyzsd.circleprogress.ArcProgress;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.StatFs;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -131,22 +130,6 @@ public class MainActivity extends AppCompatActivity
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(false);
                 } else {
                     System.out.println("HELLO");
-                    if (!hasShownTutorial) {
-//                        View menuView = findViewById(R.id.btn_appbar_filter);
-//                        int[] location = new int[2];
-//                        menuView.getLocationOnScreen(location);
-//                        int locationX = location[0];
-//                        int locationY = location[1];
-//                        System.out.println("HELLO");
-//                        ViewTarget target = new ViewTarget(mMenu.findItem(R.id.btn_appbar_filter));
-//                        new ShowcaseView.Builder(a)
-//                                .setTarget(target)
-//                                .setContentTitle("Hello")
-//                                .setContentText("Hello")
-//                                .build();
-//
-//                        hasShownTutorial = true;
-                    }
                     mMenu.findItem(R.id.btn_appbar_filter).setVisible(true);
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(true);
                 }

@@ -1,63 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.another_titanium.SearchActivty"
+    tools:context="com.example.android.another_titanium.SearchActivity"
     tools:showIn="@layout/activity_search">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
         android:weightSum="1">
 
         <SearchView
             android:id="@+id/searchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/back" />
+            android:background="@drawable/back"
+            android:layout_weight="0.1"
+            android:iconifiedByDefault="false"/>
 
         <ListView
             android:id="@+id/searchResults"
             android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_weight="0.56" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.8" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_weight="0.24"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/RestoreSearch"
-                android:layout_width="179dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1"
-                android:background="@color/colorRestore"
-                android:paddingRight="5dp"
+                android:background="#00838F"
                 android:text="Restore"
                 android:textColor="@color/colorAccent" />
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="175dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_weight="1"
-                android:background="@color/colorRestore"
+                android:background="#00838F"
                 android:paddingLeft="5dp"
                 android:text="Backup"
                 android:textColor="@color/colorAccent" />
@@ -65,4 +58,4 @@
 
     </LinearLayout>
     tools:showIn="@layout/activity_search_activty">
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
