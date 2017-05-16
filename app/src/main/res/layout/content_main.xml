@@ -1,237 +1,360 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.flipboard.bottomsheet.BottomSheetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.another_titanium.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:id = "@+id/actionsheet"
+    android:layout_width="match_parent">
 
-
-    <TabHost
-        android:id="@+id/tabHost"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <TabHost
+            android:id="@+id/tabHost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:theme="@style/AppTheme"
-                android:visibility="visible"></TabWidget>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/Installed"
+                <TabWidget
+                    android:id="@android:id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:theme="@style/AppTheme"
+                    android:visibility="visible"/>
 
-                    <ListView
-                        android:id="@+id/lstApps"
-                        android:layout_width="match_parent"
-                        android:layout_height="396dp" />
-
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <LinearLayout
+                        android:id="@+id/Installed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.9"
-                        android:orientation="horizontal">
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
-                        <Button
-                            android:id="@+id/btnBackup"
+                        <ListView
+                            android:id="@+id/lstApps"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"/>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:background="#00838F"
-                            android:enabled="true"
-                            android:text="Backup"
-                            android:textColor="@android:color/white" />
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
+                            android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/btnToCloud"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:background="#00838F"
-                            android:enabled="true"
-                            android:onClick="showDialog"
-                            android:text="Send to Cloud"
-                            android:textColor="@android:color/white" />
+                            <Button
+                                android:id="@+id/btnBackup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="1"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:text="Backup"
+                                android:onClick="backupInstalledApps"
+                                android:textColor="@android:color/white" />
+
+                            <Button
+                                android:id="@+id/btnToCloud"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:onClick="showDialog"
+                                android:text="Send to Cloud"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
                     </LinearLayout>
+                    <RelativeLayout
+                        android:id="@+id/Home"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                </LinearLayout>
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/UserAppsProgress"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="100dp"
+                            android:background="#ffffff"
+                            app:arc_stroke_width="5dp"
+                            custom:arc_bottom_text="Apps"
+                            custom:arc_bottom_text_size="12dp"
+                            custom:arc_finished_color="@android:color/holo_purple"
+                            custom:arc_progress="75"
+                            custom:arc_suffix_text=" "
+                            custom:arc_text_size="25dp"
+                            custom:arc_unfinished_color="#aaaaaa" />
 
-                <RelativeLayout
-                    android:id="@+id/Home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arcProgress"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="275dp"
+                            android:layout_marginTop="100dp"
+                            android:background="#ffffff"
+                            custom:arc_bottom_text="System"
+                            custom:arc_bottom_text_size="12dp"
+                            custom:arc_finished_color="@android:color/holo_red_dark"
+                            custom:arc_progress="75"
+                            custom:arc_stroke_width="5dp"
+                            custom:arc_suffix_text=" "
+                            custom:arc_text_size="25dp"
+                            custom:arc_unfinished_color="#aaaaaa" />
 
-                    <com.github.lzyzsd.circleprogress.ArcProgress
-                        android:id="@+id/UserAppsProgress"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="100dp"
-                        android:background="#ffffff"
-                        app:arc_stroke_width="5dp"
-                        custom:arc_bottom_text="Apps"
-                        custom:arc_bottom_text_size="12dp"
-                        custom:arc_finished_color="@android:color/holo_purple"
-                        custom:arc_progress="75"
-                        custom:arc_suffix_text=" "
-                        custom:arc_text_size="25dp"
-                        custom:arc_unfinished_color="#aaaaaa" />
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arc_progress"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            android:layout_marginLeft="95dp"
+                            android:layout_marginTop="40dp"
+                            android:background="#ffffff"
+                            app:arc_stroke_width="7dp"
+                            custom:arc_bottom_text="Storage"
+                            custom:arc_bottom_text_size="24dp"
+                            custom:arc_finished_color="@color/colorBackup"
+                            custom:arc_progress="55"
+                            custom:arc_suffix_text=" "
+                            custom:arc_text_size="75dp"
+                            custom:arc_unfinished_color="#aaaaaa" />
 
-                    <com.github.lzyzsd.circleprogress.ArcProgress
-                        android:id="@+id/arcProgress"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginLeft="275dp"
-                        android:layout_marginTop="100dp"
-                        android:background="#ffffff"
-                        custom:arc_bottom_text="System"
-                        custom:arc_bottom_text_size="12dp"
-                        custom:arc_finished_color="@android:color/holo_red_dark"
-                        custom:arc_progress="75"
-                        custom:arc_stroke_width="5dp"
-                        custom:arc_suffix_text=" "
-                        custom:arc_text_size="25dp"
-                        custom:arc_unfinished_color="#aaaaaa" />
 
-                    <com.github.lzyzsd.circleprogress.ArcProgress
-                        android:id="@+id/arc_progress"
-                        android:layout_width="175dp"
-                        android:layout_height="175dp"
-                        android:layout_marginLeft="95dp"
-                        android:layout_marginTop="40dp"
-                        android:background="#ffffff"
-                        app:arc_stroke_width="7dp"
-                        custom:arc_bottom_text="Storage"
-                        custom:arc_bottom_text_size="24dp"
-                        custom:arc_finished_color="@color/colorBackup"
-                        custom:arc_progress="55"
-                        custom:arc_suffix_text=" "
-                        custom:arc_text_size="75dp"
-                        custom:arc_unfinished_color="#aaaaaa" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="108dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/btnMusic"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="4dp"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_red_light"
+                                    android:clickable="true"
+                                    android:gravity="center"
+                                    android:onClick="showActionSheet"
+                                    android:orientation="horizontal"
+                                    android:tag="Music">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/music_white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left|center_vertical"
+                                        android:text="MUSIC"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/btnGallery"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_blue_light"
+                                    android:clickable="true"
+                                    android:gravity="center"
+                                    android:onClick="showActionSheet"
+                                    android:tag="Gallery">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/gallery_white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="GALLERY"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="106dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="4dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/btnContacts"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="4dp"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_purple"
+                                    android:clickable="true"
+                                    android:gravity="center"
+                                    android:onClick="showActionSheet"
+                                    android:orientation="horizontal"
+                                    android:tag="Contacts">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/contacts_white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="CONTACTS"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/btnCallLog"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_orange_dark"
+                                    android:clickable="true"
+                                    android:gravity="center"
+                                    android:onClick="showActionSheet"
+                                    android:tag="Call Log">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="right|center_vertical"
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/call_log_white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="CALL LOG"
+                                        android:textColor="@android:color/white" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/Archive"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <ListView
+                            android:id="@+id/lstArchive"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_weight="0.9" />
+
+                        <Button
+                            android:id="@+id/btnRestore"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
+                            android:background="@color/colorBackup"
+                            android:enabled="true"
+                            android:onClick="restoreArchive"
+                            android:text="Restore"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Installed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <ListView
+                            android:id="@+id/lstApps"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
                             android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/btnMusic"
-                                android:layout_width="172dp"
-                                android:layout_height="106dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_red_light"
-                                android:text="Music"
-                                android:textColor="@android:color/white" />
-
-                            <Button
-                                android:id="@+id/btnGallery"
-                                android:layout_width="172dp"
-                                android:layout_height="106dp"
+                                android:id="@+id/btnBackup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_blue_light"
-                                android:text="Gallery"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:text="Backup"
+                                android:onClick="backupInstalledApps"
                                 android:textColor="@android:color/white" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="8dp"
-                            android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/btnContacts"
-                                android:layout_width="172dp"
-                                android:layout_height="106dp"
+                                android:id="@+id/btnToCloud"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
-                                android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_purple"
-                                android:text="Contacts"
-                                android:textColor="@android:color/white" />
-
-                            <Button
-                                android:id="@+id/btnCallLog"
-                                android:layout_width="172dp"
-                                android:layout_height="106dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_orange_dark"
-                                android:text="Call Log"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:onClick="showDialog"
+                                android:text="Send to Cloud"
                                 android:textColor="@android:color/white" />
                         </LinearLayout>
                     </LinearLayout>
 
-                </RelativeLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
 
-                <LinearLayout
-                    android:id="@+id/Archive"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/lstArchive"
-                        android:layout_width="match_parent"
-                        android:layout_height="346dp"
-                        android:layout_weight="0.9" />
-
-                    <Button
-                        android:id="@+id/btnRestore"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="0.1"
-                        android:background="@color/colorRestore"
-                        android:enabled="false"
-                        android:text="Restore"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
-
-</LinearLayout>
+    </LinearLayout>
+</com.flipboard.bottomsheet.BottomSheetLayout>

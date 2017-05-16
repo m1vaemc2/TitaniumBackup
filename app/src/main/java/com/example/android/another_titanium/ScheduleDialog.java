@@ -20,7 +20,7 @@ public class ScheduleDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogeTheme);
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.schedler_shedcule, null))
+        builder.setView(inflater.inflate(R.layout.fragment_schedule, null))
                 .setNegativeButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 

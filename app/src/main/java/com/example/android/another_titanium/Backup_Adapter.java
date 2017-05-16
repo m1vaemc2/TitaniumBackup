@@ -1,50 +1,40 @@
 package com.example.android.another_titanium;
 
 import android.content.Context;
-import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by user on 2017/04/22.
  */
 
-public class Backup_Adapter implements ListAdapter
+public class Backup_Adapter extends BaseAdapter
 {
     private Context context;
     public ArrayList<Backup_Item> apps;
+    public boolean isArchive = false;
 
     public Backup_Adapter(Context c, ArrayList<Backup_Item> inApps)
     {
         context = c;
         apps = inApps;
     }
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
 
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
+    public void setNewData(ArrayList<Backup_Item> new_items) {
+        apps.clear();
+        apps.addAll(new_items);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -63,17 +53,10 @@ public class Backup_Adapter implements ListAdapter
     }
 
     @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
         convertView = LayoutInflater.from(context).inflate(R.layout.backup_item, parent, false);
-        Backup_Item b = getItem(position);
-
-        int drawableId = context.getResources().getIdentifier(b.image, "drawable", context.getPackageName());
+        final Backup_Item b = getItem(position);
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon1);
         TextView name = (TextView) convertView.findViewById(R.id.txtAppName);
@@ -83,9 +66,24 @@ public class Backup_Adapter implements ListAdapter
 
         name.setText(b.appName);
         size.setText(b.appSize);
-        date.setText(b.backupDate);
+        if (isArchive)
+            date.setText(b.backupDate);
         selected.setChecked(b.selected);
-        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
+        convertView.setTag(b);
+        selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                b.selected = isChecked;
+                System.out.println(b.selected);
+            }
+        });
+
+        try {
+            Bitmap bmp = BitmapFactory.decodeStream(context.getAssets().open(b.image));
+            icon.setImageBitmap(bmp);
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        }
 
         return convertView;
     }
@@ -102,6 +100,31 @@ public class Backup_Adapter implements ListAdapter
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return (getCount()==0);
+    }
+
+    public Backup_Adapter searchAdapter(String searched) {
+        if (searched == "" || searched == null) {
+            System.out.println("No query");
+            return null;
+        }
+        //System.out.println(searched);
+
+        ArrayList<Backup_Item> results = new ArrayList<>();
+
+        for (int x = 0; x < getCount(); ++x) {
+            Backup_Item temp = getItem(x);
+
+            if (temp.appName.contains(searched)) {
+                //System.out.println(temp.appName);
+                results.add(temp);
+            }
+        }
+
+        if (results.size() == 0) {
+            return null;
+        }
+
+        return new Backup_Adapter(context, results);
     }
 }
