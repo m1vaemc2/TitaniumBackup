@@ -41,6 +41,8 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:background="#00838F"
+                android:enabled="true"
+                android:onClick="restore"
                 android:text="Restore"
                 android:textColor="@color/colorAccent" />
 
@@ -51,6 +53,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:background="#00838F"
+                android:enabled="true"
+                android:onClick="backup"
                 android:paddingLeft="5dp"
                 android:text="Backup"
                 android:textColor="@color/colorAccent" />

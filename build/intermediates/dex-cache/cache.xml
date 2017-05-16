@@ -2,121 +2,22 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\af47ed99b3a5dfdb0562c25e55716cce28a657af\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\user\Documents\GitHub\TitaniumBackup\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_6eb114fbf54f80c8225ad628014984ccaec432d5.jar" />
+        sha1="dd65f4a21215263140457e3ca63258476fbb78bb">
+        <dex dex="C:\Users\user\Documents\GitHub\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_369fbad95c19411b8559f2d25c8c8bf4885b813e\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\73c46e8ec1f0d3bd47a042b8d03c2813ab13c682\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\user\Documents\GitHub\TitaniumBackup\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_2d7e54abbc65ea22708d6bf4a664c634e394866f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_507e58f9a05a785dae5f4afecdd73659a20124c1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\ee600be5ea6569c2c6df598d4eca0689cb392928\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_2845c33a47141e038db7d96dba0a9611e7a09b9d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\0aad44b3e2000ae0b95b516df449bb6011e683fe\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f200454bd6851899efe021d2a4673959986edaed">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_09f8cd20f42710a7151888c0c00d89f934d1335a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\c57363e19cc839381fb727494a79430786aa6395\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_018d352ca33c34b3b37bff42ecdfed9600866b6a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\cd190c312b0d7cef77ea6a8296c7f2cc15560232\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_58c7036b6508fbddabca30e7c5b961e46db32031.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\77d1793aabd4c837325d01bcc30c93e52d8bac28\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a06b0579dbe59192ef460e3de04657720925d05b">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_ac51f9f97ae5fd8a3797dd36588aa6876e4fa44a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\e17fa1a7cdd7b1f25f0f5f7d06cc9326e1cfa9b1\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_4bb7e54b864e40b542f7692e9b211762b9172078.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_fa0c8a69ba4f6a54470c9078e373299fe6fb7d80.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\8145ea176cb8524a61b2e9594123b6e8201cda25\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_9a3b2316f17265af1488439549bd74c754952042.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\5c9ff39b3f1da88aaf07e6cc143f75e2fb0c143e\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_79e28b510e4a61bbf95e74d705823cfe3f994062.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jason\.android\build-cache\b70f0f91529e85697377dd71a56bbe972361db04\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_31c18696f723fa4188029f7a7f57c8a1d04103f8.jar" />
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\user\Documents\GitHub\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_e774f2005e66cbab4ef1436c169f51beac819a9a\classes.dex" />
     </item>
 
 </items>
