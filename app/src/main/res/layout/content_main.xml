@@ -39,6 +39,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <LinearLayout
+                        android:id="@+id/Archive"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                        <ListView
+                            android:id="@+id/lstArchive"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9" />
+
+                        <Button
+                            android:id="@+id/btnRestore"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
+                            android:background="@color/colorBackup"
+                            android:enabled="true"
+                            android:onClick="onArchiveRestoreClick"
+                            android:text="Restore"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
                     <RelativeLayout
                         android:id="@+id/Home"
                         android:layout_width="match_parent"
@@ -232,32 +258,6 @@
                         </LinearLayout>
 
                     </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/Archive"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/white"
-                        android:orientation="vertical">
-
-                        <ListView
-                            android:id="@+id/lstArchive"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.9" />
-
-                        <Button
-                            android:id="@+id/btnRestore"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="0.1"
-                            android:background="@color/colorBackup"
-                            android:enabled="true"
-                            android:onClick="onArchiveRestoreClick"
-                            android:text="Restore"
-                            android:textColor="@android:color/white" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/Installed"

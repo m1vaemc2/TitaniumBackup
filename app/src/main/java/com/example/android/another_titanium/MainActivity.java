@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity
         systemApps.add(new Backup_Item("messages.png", "Messages", "500MB", ""));
         systemApps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
         systemApps.add(new Backup_Item("wifi.png", "WiFi Information", "1MB", ""));
+        systemApps.add(new Backup_Item("Docs-icon.png", "Documents", "9MB", ""));
         for (Backup_Item b : systemApps) {
             b.isSystemApp = true;
         }
@@ -110,8 +111,8 @@ public class MainActivity extends AppCompatActivity
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
 
-//        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
-//        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
+        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
+        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
         archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
 
         archiveAdapter = new Backup_Adapter(getBaseContext(),  new ArrayList<>(archivedApps));
