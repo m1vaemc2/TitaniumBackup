@@ -24,7 +24,9 @@ public class Schedule extends AppCompatActivity {
         FloatingActionButton fabulous = (FloatingActionButton) findViewById(R.id.floatingActionButton4);
         fabulous.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.out.println("YAAAY");
+                System.out.println("OPEN DIALOG");
+                ScheduleDialog dialog = new ScheduleDialog();
+                dialog.show(getSupportFragmentManager(), "Schedule");
             }
         });
     }

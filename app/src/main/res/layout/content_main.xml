@@ -38,7 +38,6 @@
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                     <LinearLayout
                         android:id="@+id/Installed"
                         android:layout_width="match_parent"
@@ -86,7 +85,6 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
                     <RelativeLayout
                         android:id="@+id/Home"
                         android:layout_width="match_parent"
@@ -153,124 +151,128 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="108dp"
-                                android:orientation="horizontal"
+                                android:layout_marginBottom="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginBottom="4dp">
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:id="@+id/btnMusic"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:onClick="showActionSheet"
-                                    android:backgroundTint="@android:color/holo_red_light"
-                                    android:background="@drawable/background_button"
-                                    android:clickable="true"
                                     android:layout_marginEnd="4dp"
-                                    android:tag="Music"
-                                    android:orientation="horizontal"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_red_light"
+                                    android:clickable="true"
                                     android:gravity="center"
-                                    >
+                                    android:onClick="showActionSheet"
+                                    android:orientation="horizontal"
+                                    android:tag="Music">
+
                                     <ImageView
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
-                                        android:src="@drawable/music_white"
-                                        android:layout_marginEnd="5dp"/>
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/music_white" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="left|center_vertical"
                                         android:text="MUSIC"
-                                        android:textColor="@android:color/white"/>
+                                        android:textColor="@android:color/white" />
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_marginStart="4dp"
                                     android:id="@+id/btnGallery"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="4dp"
                                     android:layout_weight="0.5"
-                                    android:onClick="showActionSheet"
-                                    android:tag="Gallery"
-                                    android:backgroundTint="@android:color/holo_blue_light"
                                     android:background="@drawable/background_button"
-                                    android:gravity="center"
+                                    android:backgroundTint="@android:color/holo_blue_light"
                                     android:clickable="true"
-                                    >
+                                    android:gravity="center"
+                                    android:onClick="showActionSheet"
+                                    android:tag="Gallery">
+
                                     <ImageView
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
-                                        android:src="@drawable/gallery_white"
-                                        android:layout_marginEnd="5dp"/>
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/gallery_white" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="GALLERY"
-                                        android:textColor="@android:color/white"/>
+                                        android:textColor="@android:color/white" />
                                 </LinearLayout>
 
-                              </LinearLayout>
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="106dp"
                                 android:layout_marginBottom="8dp"
-                                android:orientation="horizontal"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginTop="4dp">
+                                android:layout_marginTop="4dp"
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:id="@+id/btnContacts"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:onClick="showActionSheet"
-                                    android:backgroundTint="@android:color/holo_purple"
-                                    android:background="@drawable/background_button"
-                                    android:clickable="true"
                                     android:layout_marginEnd="4dp"
-                                    android:tag="Contacts"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_purple"
+                                    android:clickable="true"
                                     android:gravity="center"
+                                    android:onClick="showActionSheet"
                                     android:orientation="horizontal"
-                                    >
+                                    android:tag="Contacts">
+
                                     <ImageView
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
-                                        android:src="@drawable/contacts_white"
-                                        android:layout_marginEnd="5dp"/>
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/contacts_white" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="CONTACTS"
-                                        android:textColor="@android:color/white"/>
+                                        android:textColor="@android:color/white" />
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_marginStart="4dp"
                                     android:id="@+id/btnCallLog"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="4dp"
                                     android:layout_weight="0.5"
-                                    android:onClick="showActionSheet"
-                                    android:tag="Call Log"
-                                    android:backgroundTint="@android:color/holo_orange_dark"
                                     android:background="@drawable/background_button"
+                                    android:backgroundTint="@android:color/holo_orange_dark"
                                     android:clickable="true"
                                     android:gravity="center"
-                                    >
+                                    android:onClick="showActionSheet"
+                                    android:tag="Call Log">
+
                                     <ImageView
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
                                         android:layout_gravity="right|center_vertical"
-                                        android:src="@drawable/call_log_white"
-                                        android:layout_marginEnd="5dp"/>
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/call_log_white" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="CALL LOG"
-                                        android:textColor="@android:color/white"/>
+                                        android:textColor="@android:color/white" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -297,9 +299,57 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0.1"
                             android:background="@color/colorBackup"
+                            android:enabled="true"
+                            android:onClick="restoreArchive"
                             android:text="Restore"
-                            android:textColor="@android:color/white"
-                            android:onClick="onArchiveRestoreClick"/>
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Installed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <ListView
+                            android:id="@+id/lstApps"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btnBackup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="1"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:text="Backup"
+                                android:onClick="backupInstalledApps"
+                                android:textColor="@android:color/white" />
+
+                            <Button
+                                android:id="@+id/btnToCloud"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:onClick="showDialog"
+                                android:text="Send to Cloud"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
                     </LinearLayout>
 
                 </FrameLayout>
