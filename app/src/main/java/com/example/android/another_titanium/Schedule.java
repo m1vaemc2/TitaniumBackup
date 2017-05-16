@@ -1,5 +1,6 @@
 package com.example.android.another_titanium;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,14 +20,16 @@ public class Schedule extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         System.out.println(toolbar);
         setSupportActionBar(toolbar);
+        final Intent i = new Intent(this, new_schedule.class);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FloatingActionButton fabulous = (FloatingActionButton) findViewById(R.id.floatingActionButton4);
         fabulous.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("OPEN DIALOG");
-                ScheduleDialog dialog = new ScheduleDialog();
-                dialog.show(getSupportFragmentManager(), "Schedule");
+                //ScheduleDialog dialog = new ScheduleDialog();
+                //dialog.show(getSupportFragmentManager(), "Schedule");
+                startActivity(i);
             }
         });
     }

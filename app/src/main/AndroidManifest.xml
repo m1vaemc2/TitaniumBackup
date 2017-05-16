@@ -24,7 +24,11 @@
             android:label="@string/title_activity_schedule"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity
+            android:name=".new_schedule"
+            android:label="@string/title_activity_new_schedule"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

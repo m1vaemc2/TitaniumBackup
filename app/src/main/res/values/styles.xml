@@ -16,6 +16,7 @@
     <style name="AppTheme.Checkbox">
         <item name="colorAccent">@color/colorBackup</item>
     </style>
+
     <style name="AppTheme.Switch">
         <item name="colorAccent">@color/colorBackup</item>
     </style>
@@ -23,6 +24,7 @@
     <style name="AppTheme.FABulous">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
+
     <style name="AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
         <item name="android:colorPrimary">#00397F</item>
         <item name="android:colorAccent">#0AAEEF</item>

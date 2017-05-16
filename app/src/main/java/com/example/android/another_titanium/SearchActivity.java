@@ -23,11 +23,20 @@ public class SearchActivity extends AppCompatActivity {
 
         final ListView v = (ListView) findViewById(R.id.searchResults);
         ArrayList<Backup_Item> apps = new ArrayList<>();
-        apps.add(new Backup_Item("@drawable/chrome.png", "Google Chrome", "16MB", ""));
-        apps.add(new Backup_Item("@drawable/chrome.png", "Google Docs", "16MB", ""));
-        apps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
-        apps.add(new Backup_Item("", "Uber", "6MB", ""));
-        apps.add(new Backup_Item("", "Youtube", "1MB", ""));
+        apps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
+        apps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
+        apps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
+        apps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
+        apps.add(new Backup_Item("gallery.png", "Gallery", "16MB", ""));
+
+        apps.add(new Backup_Item("messages.png", "Messages", "500MB", ""));
+        apps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
+        //apps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
+        apps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
+
+        apps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
+        apps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
+        apps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
 
         final Backup_Adapter adapter = new Backup_Adapter(getBaseContext(), apps);
         v.setAdapter(adapter);
