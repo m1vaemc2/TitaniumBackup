@@ -156,7 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/txt_922"
             android:layout_below="@+id/txt_922"
-            android:text="05:00 Mondays"
+            android:text="07:00 Everyday"
             android:textSize="11sp" />
 
         <TextView
@@ -167,7 +167,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"
-            android:text="Send to cloud"
+            android:text="Backup All Apps"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
@@ -177,6 +177,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="19dp"
+            android:checked="true"
             android:theme="@style/AppTheme.Switch" />
 
     </RelativeLayout>
