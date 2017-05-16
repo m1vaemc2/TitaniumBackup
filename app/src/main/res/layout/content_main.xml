@@ -254,7 +254,7 @@
                             android:layout_weight="0.1"
                             android:background="@color/colorBackup"
                             android:enabled="true"
-                            android:onClick="restoreArchive"
+                            android:onClick="onArchiveRestoreClick"
                             android:text="Restore"
                             android:textColor="@android:color/white" />
                     </LinearLayout>
