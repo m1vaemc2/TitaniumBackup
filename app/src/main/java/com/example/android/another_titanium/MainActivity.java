@@ -1,32 +1,31 @@
 package com.example.android.another_titanium;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.os.Handler;
+
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.github.lzyzsd.circleprogress.ArcProgress;
 import android.os.Bundle;
@@ -35,18 +34,21 @@ import android.os.StatFs;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import static android.R.attr.handle;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TabHost tabHost;
     private Menu mMenu;
     String buttonClicked = "Nothing";
-    Backup_Adapter adapter;
+    Backup_Adapter appsAdapter;
     ArrayList<Backup_Item> userApps = new ArrayList<>();
     ArrayList<Backup_Item> systemApps = new ArrayList<>();
+    ArrayList<Backup_Item> archivedApps = new ArrayList<>();
+    Backup_Adapter archiveAdapter;
+    boolean showingUserApps = true;
     ProgressDialog progressDialog;
+    boolean hasShownTutorial = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -99,30 +101,52 @@ public class MainActivity extends AppCompatActivity
         systemApps.add(new Backup_Item("messages.png", "Messages", "500MB", ""));
         systemApps.add(new Backup_Item("email.png", "Emails", "6MB", ""));
         systemApps.add(new Backup_Item("wifi.png", "WiFi Information", "1MB", ""));
+        for (Backup_Item b : systemApps) {
+            b.isSystemApp = true;
+        }
 
-        adapter = new Backup_Adapter(getBaseContext(), new ArrayList<>(userApps));
-        v.setAdapter(adapter);
+        appsAdapter = new Backup_Adapter(getBaseContext(), new ArrayList<>(userApps));
+        v.setAdapter(appsAdapter);
 
         // Archive
         v = (ListView) findViewById(R.id.lstArchive);
-        ArrayList<Backup_Item> archivedApps = new ArrayList<>();
-        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
-        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
+
+//        archivedApps.add(new Backup_Item("navup.png", "NavUP", "1MB", "01/01/2017"));
+//        archivedApps.add(new Backup_Item("facebook.png", "Facebook", "18MB", "08/09/2016"));
         archivedApps.add(new Backup_Item("instagram.png", "Instagram", "50MB", "28/03/2017"));
-        archivedApps.add(new Backup_Item("email.png", "Emails", "14MB", "15/01/2017"));
 
-        Backup_Adapter adapter2 = new Backup_Adapter(getBaseContext(), archivedApps);
-        v.setAdapter(adapter2);
+        archiveAdapter = new Backup_Adapter(getBaseContext(),  new ArrayList<>(archivedApps));
+        archiveAdapter.isArchive = true;
+        v.setAdapter(archiveAdapter);
 
+        final Activity a = this;
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
             @Override
             public void onTabChanged(String tabId) {
                 int i = host.getCurrentTab();
                 if (i == 0) {
+
                     mMenu.findItem(R.id.btn_appbar_filter).setVisible(false);
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(false);
                 } else {
+                    System.out.println("HELLO");
+                    if (!hasShownTutorial) {
+//                        View menuView = findViewById(R.id.btn_appbar_filter);
+//                        int[] location = new int[2];
+//                        menuView.getLocationOnScreen(location);
+//                        int locationX = location[0];
+//                        int locationY = location[1];
+//                        System.out.println("HELLO");
+//                        ViewTarget target = new ViewTarget(mMenu.findItem(R.id.btn_appbar_filter));
+//                        new ShowcaseView.Builder(a)
+//                                .setTarget(target)
+//                                .setContentTitle("Hello")
+//                                .setContentText("Hello")
+//                                .build();
+//
+//                        hasShownTutorial = true;
+                    }
                     mMenu.findItem(R.id.btn_appbar_filter).setVisible(true);
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(true);
                 }
@@ -190,10 +214,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.btn_userApps) {
-                    adapter.setNewData(userApps);
+                    showingUserApps = true;
+                    appsAdapter.setNewData(userApps);
                     return true;
                 } else if (item.getItemId() == R.id.btn_systemApps) {
-                    adapter.setNewData(systemApps);
+                    showingUserApps = false;
+                    appsAdapter.setNewData(systemApps);
                     return true;
                 }
                 return false;
@@ -249,72 +275,56 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /* The OnClick handler for the Backup button on the Installed Apps screen */
     public void backupInstalledApps(View view) {
-        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Please wait, we're making progress...");
-        progressDialog.setTitle("Backing Up");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.show();
-        final Handler handle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                progressDialog.incrementProgressBy(1);
+        ArrayList<Backup_Item> toChange;    // The list of apps being backed up
+
+        // Get the relevant arraylist (User or system)
+        if (showingUserApps) {
+            toChange = userApps;
+        } else {
+            toChange = systemApps;
+        }
+
+        Calendar c = Calendar.getInstance();
+        String date = c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR) + " @ " + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE);
+
+        // Get the selected apps
+        ArrayList<Backup_Item> toRemove = new ArrayList<>();
+        for (Backup_Item b : toChange) {
+            if (b.selected) {
+                toRemove.add(b);
+                b.selected = false;
+                b.backupDate = date;
             }
-        };
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (progressDialog.getProgress() <= progressDialog
-                            .getMax()) {
-                        Thread.sleep(50);
-                        handle.sendMessage(handle.obtainMessage());
-                        if (progressDialog.getProgress() == progressDialog
-                                .getMax()) {
-                            progressDialog.dismiss();
-                        }
+        }
+
+        // Show snackbar
+        if (toRemove.size() > 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Backed up " + toRemove.size() + " apps.", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        } else if (toRemove.size() == 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Backed up " + toRemove.get(0).appName + ".", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+
+        // Add apps to archive
+        for (Backup_Item b : toRemove) {
+            if (!archivedApps.contains(b)) {
+                archivedApps.add(b);
+            } else {
+                // Update date of backup
+                for (Backup_Item b2 : archivedApps) {
+                    if (b.equals(b2)) {
+                        b2.backupDate = date;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
-        }).start();
-    }
-    public void restoreArchive(View view)
-    {
-        progressDialog = new ProgressDialog(new android.support.v7.view.ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Checkbox));
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Please wait, we're making progress...");
-        progressDialog.setTitle("Restoring");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.show();
-        final Handler handle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                progressDialog.incrementProgressBy(1);
-            }
-        };
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (progressDialog.getProgress() <= progressDialog
-                            .getMax()) {
-                        Thread.sleep(50);
-                        handle.sendMessage(handle.obtainMessage());
-                        if (progressDialog.getProgress() == progressDialog
-                                .getMax()) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        }
+
+        // Update adapters
+        appsAdapter.setNewData(toChange);
+        archiveAdapter.setNewData(archivedApps);
     }
 
     public void showDialog(View view)
@@ -407,6 +417,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showActionSheet(View view) {
+
+//        sv.setButtonPosition(lps);
         buttonClicked = view.getTag().toString();
         final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
         actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
@@ -473,6 +485,51 @@ public class MainActivity extends AppCompatActivity
         hideActionSheet();
     }
 
+    /* OnClick handler for the Restore button on the archive screen */
+    public void onArchiveRestoreClick(View view) {
+        ArrayList<Backup_Item> toRemove = new ArrayList<>();    // The apps that are being restored
+
+        // Get selected apps (and reset checkboxes)
+        for (Backup_Item b : archivedApps) {
+            if (b.selected) {
+                toRemove.add(b);
+                b.selected = false;
+                b.backupDate = "";
+            }
+        }
+
+        // Show snackbar
+        if (toRemove.size() > 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Restored " + toRemove.size() + " apps.", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        } else if (toRemove.size() == 1) {
+            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.actionsheet), "Restored " + toRemove.get(0).appName + ".", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+
+        // Remove apps from archive
+        archivedApps.removeAll(toRemove);
+
+        // Add apps to relevant screens (user or system)
+        for (Backup_Item b : toRemove) {
+            System.out.println(b.appName + " - " + b.isSystemApp);
+            if (b.isSystemApp) {
+                if (!systemApps.contains(b))
+                    systemApps.add(b);
+            } else {
+                if (!userApps.contains(b))
+                    userApps.add(b);
+            }
+        }
+
+        // Update adapters
+        archiveAdapter.setNewData(archivedApps);
+        if (showingUserApps) {
+            appsAdapter.setNewData(userApps);
+        } else {
+            appsAdapter.setNewData(systemApps);
+        }
+    }
     public static long getAvailableInternalMemorySize() {
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());

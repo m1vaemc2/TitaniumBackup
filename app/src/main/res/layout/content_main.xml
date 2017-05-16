@@ -38,7 +38,53 @@
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/Installed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
+                        <ListView
+                            android:id="@+id/lstApps"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.1"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btnBackup"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="1"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:text="Backup"
+                                android:onClick="backupInstalledApps"
+                                android:textColor="@android:color/white" />
+
+                            <Button
+                                android:id="@+id/btnToCloud"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:background="#00838F"
+                                android:enabled="true"
+                                android:onClick="showDialog"
+                                android:text="Send to Cloud"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
+                    </LinearLayout>
                     <RelativeLayout
                         android:id="@+id/Home"
                         android:layout_width="match_parent"
@@ -304,7 +350,6 @@
                                 android:text="Send to Cloud"
                                 android:textColor="@android:color/white" />
                         </LinearLayout>
-
                     </LinearLayout>
 
                 </FrameLayout>
