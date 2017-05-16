@@ -83,6 +83,15 @@
         <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_fa0c8a69ba4f6a54470c9078e373299fe6fb7d80.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\Jason\.android\build-cache\77d1793aabd4c837325d01bcc30c93e52d8bac28\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a06b0579dbe59192ef460e3de04657720925d05b">
+        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ac51f9f97ae5fd8a3797dd36588aa6876e4fa44a\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\Jason\.android\build-cache\8145ea176cb8524a61b2e9594123b6e8201cda25\output\jars\classes.jar"
         jumboMode="false"

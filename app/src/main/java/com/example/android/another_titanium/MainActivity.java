@@ -1,17 +1,13 @@
 package com.example.android.another_titanium;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -29,13 +25,11 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.os.Handler;
+
 import com.flipboard.bottomsheet.BottomSheetLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static android.R.attr.handle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     Backup_Adapter archiveAdapter;
     boolean showingUserApps = true;
     ProgressDialog progressDialog;
+    boolean hasShownTutorial = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -119,15 +114,34 @@ public class MainActivity extends AppCompatActivity
         archiveAdapter.isArchive = true;
         v.setAdapter(archiveAdapter);
 
+        final Activity a = this;
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
             @Override
             public void onTabChanged(String tabId) {
                 int i = host.getCurrentTab();
                 if (i == 0) {
+
                     mMenu.findItem(R.id.btn_appbar_filter).setVisible(false);
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(false);
                 } else {
+                    System.out.println("HELLO");
+                    if (!hasShownTutorial) {
+//                        View menuView = findViewById(R.id.btn_appbar_filter);
+//                        int[] location = new int[2];
+//                        menuView.getLocationOnScreen(location);
+//                        int locationX = location[0];
+//                        int locationY = location[1];
+//                        System.out.println("HELLO");
+//                        ViewTarget target = new ViewTarget(mMenu.findItem(R.id.btn_appbar_filter));
+//                        new ShowcaseView.Builder(a)
+//                                .setTarget(target)
+//                                .setContentTitle("Hello")
+//                                .setContentText("Hello")
+//                                .build();
+//
+//                        hasShownTutorial = true;
+                    }
                     mMenu.findItem(R.id.btn_appbar_filter).setVisible(true);
                     mMenu.findItem(R.id.btn_appbar_search).setVisible(true);
                 }
@@ -382,6 +396,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showActionSheet(View view) {
+
+//        sv.setButtonPosition(lps);
         buttonClicked = view.getTag().toString();
         final BottomSheetLayout actionSheet = (BottomSheetLayout) findViewById(R.id.actionsheet);
         actionSheet.showWithSheetView(LayoutInflater.from(this).inflate(R.layout.layout_action_sheet, actionSheet, false));
