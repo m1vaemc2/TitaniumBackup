@@ -143,4 +143,49 @@
 
     </FrameLayout>
 
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/viewToHide"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_922"
+            android:layout_below="@+id/txt_922"
+            android:text="05:00 Mondays"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/txt_922"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:text="Send to cloud"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="19dp"
+            android:theme="@style/AppTheme.Switch" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray">
+
+    </FrameLayout>
+
 </LinearLayout>

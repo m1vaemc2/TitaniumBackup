@@ -2,13 +2,10 @@ package com.example.android.another_titanium;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 public class Schedule extends AppCompatActivity {
 
@@ -22,10 +19,12 @@ public class Schedule extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FloatingActionButton fabulous = (FloatingActionButton) findViewById(R.id.floatingActionButton4);
+
+        final View theNewSchedule = findViewById(R.id.viewToHide);
         fabulous.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("OPEN DIALOG");
-                ScheduleDialog dialog = new ScheduleDialog();
+                ScheduleDialog dialog = new ScheduleDialog(theNewSchedule);
                 dialog.show(getSupportFragmentManager(), "Schedule");
             }
         });

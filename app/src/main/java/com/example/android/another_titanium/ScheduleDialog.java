@@ -1,5 +1,6 @@
 package com.example.android.another_titanium;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,6 +16,12 @@ import android.widget.Spinner;
  */
 
 public class ScheduleDialog extends DialogFragment {
+    @SuppressLint("ValidFragment")
+    public ScheduleDialog(View theViewToShow) {
+        this.theViewToShow = theViewToShow;
+    }
+
+    public View theViewToShow;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogeTheme);
@@ -24,7 +31,7 @@ public class ScheduleDialog extends DialogFragment {
         builder.setView(v)
                 .setNegativeButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        theViewToShow.setVisibility(View.VISIBLE);
                         System.out.println("Yay x2");
                     }
                 }).setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
