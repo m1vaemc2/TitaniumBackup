@@ -95,7 +95,7 @@ public class Backup_Adapter extends BaseAdapter
 
     @Override
     public int getViewTypeCount() {
-        return getCount();
+        return 1;
     }
 
     @Override
@@ -121,9 +121,9 @@ public class Backup_Adapter extends BaseAdapter
             }
         }
 
-        if (results.size() == 0) {
-            return null;
-        }
+//        if (results.size() == 0) {
+//            results.add(new Backup_Item("", "", "", ""));
+//        }
 
         return new Backup_Adapter(context, results);
     }
