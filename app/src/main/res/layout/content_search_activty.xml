@@ -64,4 +64,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    tools:showIn="@layout/activity_search_activty">
 </android.support.constraint.ConstraintLayout>
