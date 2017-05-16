@@ -66,6 +66,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Jason\.android\build-cache\77d1793aabd4c837325d01bcc30c93e52d8bac28\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a06b0579dbe59192ef460e3de04657720925d05b">
+        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_ac51f9f97ae5fd8a3797dd36588aa6876e4fa44a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Jason\.android\build-cache\e17fa1a7cdd7b1f25f0f5f7d06cc9326e1cfa9b1\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -81,15 +90,6 @@
         revision="25.0.2"
         sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
         <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_fa0c8a69ba4f6a54470c9078e373299fe6fb7d80.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Jason\.android\build-cache\77d1793aabd4c837325d01bcc30c93e52d8bac28\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a06b0579dbe59192ef460e3de04657720925d05b">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ac51f9f97ae5fd8a3797dd36588aa6876e4fa44a\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -117,15 +117,6 @@
         revision="25.0.2"
         sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
         <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\pre-dexed\debug\classes_31c18696f723fa4188029f7a7f57c8a1d04103f8.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="19795580892f7a0dae2eb8b825ae09096f8ec93f">
-        <dex dex="C:\Users\Jason\StudioProjects\TitaniumBackup\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d4670d843cda130bc18ed5864771c7694ada9fd5\classes.dex" />
     </item>
 
 </items>

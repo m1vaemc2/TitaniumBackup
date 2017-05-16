@@ -20,16 +20,11 @@ public class SearchActivity extends AppCompatActivity {
 
         final ListView v = (ListView) findViewById(R.id.searchResults);
         ArrayList<Backup_Item> apps = new ArrayList<>();
-        apps.add(new Backup_Item("@drawable/chrome.png", "Google Chrome", "16MB", ""));
-        apps.add(new Backup_Item("@drawable/chrome.png", "Google Docs", "16MB", ""));
-        apps.add(new Backup_Item("", "WhatsApp Messenger", "500MB", ""));
-        apps.add(new Backup_Item("", "Uber", "6MB", ""));
-        apps.add(new Backup_Item("", "Youtube", "1MB", ""));
 
-//        apps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
-//        apps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
-//        apps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
-//        apps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
+        apps.add(new Backup_Item("chrome.png", "Google Chrome", "16MB", ""));
+        apps.add(new Backup_Item("whatsapp.png", "WhatsApp Messenger", "500MB", ""));
+        apps.add(new Backup_Item("uber.jpg", "Uber", "6MB", ""));
+        apps.add(new Backup_Item("youtube.png", "Youtube", "1MB", ""));
 
         final Backup_Adapter adapter = new Backup_Adapter(getBaseContext(), apps);
         v.setAdapter(adapter);
@@ -46,7 +41,10 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 System.out.println("Change: " + newText);
                 Backup_Adapter newAdapter = adapter.searchAdapter(newText);
-                v.setAdapter(newAdapter);
+                if (newAdapter != null)
+                    v.setAdapter(newAdapter);
+                else
+                    v.setAdapter(adapter);
                 return true;
             }
         });

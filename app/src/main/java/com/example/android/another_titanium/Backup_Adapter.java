@@ -104,7 +104,7 @@ public class Backup_Adapter extends BaseAdapter
     }
 
     public Backup_Adapter searchAdapter(String searched) {
-        if (searched == "" || searched == null) {
+        if (searched.equals("") || searched == null) {
             System.out.println("No query");
             return null;
         }
@@ -115,7 +115,7 @@ public class Backup_Adapter extends BaseAdapter
         for (int x = 0; x < getCount(); ++x) {
             Backup_Item temp = getItem(x);
 
-            if (temp.appName.contains(searched)) {
+            if (temp.appName.toLowerCase().contains(searched.toLowerCase())) {
                 //System.out.println(temp.appName);
                 results.add(temp);
             }
